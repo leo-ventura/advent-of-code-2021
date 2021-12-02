@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func must(err error) {
+func Must(err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -16,11 +16,11 @@ func must(err error) {
 // Read list of integers from file specified by `filename`
 func ReadIntegersFromFile(filename string) []int {
 	file, err := os.Open(filename)
-	must(err)
+	Must(err)
 
 	defer func() {
 		err = file.Close()
-		must(err)
+		Must(err)
 	}()
 
 	scanner := bufio.NewScanner(file)
@@ -29,9 +29,9 @@ func ReadIntegersFromFile(filename string) []int {
 	for scanner.Scan() { // internally, it advances token based on sperator
 		integerString := scanner.Text()
 		integerInt, err := strconv.Atoi(integerString)
-		must(err)
+		Must(err)
 		integersInput = append(integersInput, integerInt)
-		must(err)
+		Must(err)
 	}
 
 	return integersInput
